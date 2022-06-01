@@ -14,4 +14,24 @@ public interface UserService {
 
     Users updateUser(Users user);
 
+    List<Users> getAllNgos();
+
+    Users getNgoById(String id);
+
+    List<Users> getAllPendingNgos();
+
+    List<Users> getAllAccpetedNgos();
+
+    List<Users> getAllRejectedNgos();
+
+    Users acceptNgos(String id);
+
+    Users rejectNgos(String id);
+
+    Users adminLogin(String email);
+
+    Users donorLogin(String email);
+
+    Users ngoLogin(String email);
+
 }

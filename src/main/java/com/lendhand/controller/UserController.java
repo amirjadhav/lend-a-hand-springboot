@@ -38,6 +38,24 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    // admin login
+    @GetMapping("/login/admin/{email}")
+    public Users adminLogin(@PathVariable String email) {
+        return userService.adminLogin(email);
+    }
+
+    // ngo login
+    @GetMapping("/login/ngo/{email}")
+    public Users ngoLogin(@PathVariable String email) {
+        return userService.ngoLogin(email);
+    }
+
+    // donor login
+    @GetMapping("/login/donor/{email}")
+    public Users donorLogin(@PathVariable String email) {
+        return userService.donorLogin(email);
+    }
+
     // get user by id
     @GetMapping("/user/{id}")
     public Users getUser(@PathVariable String id) {
@@ -49,4 +67,56 @@ public class UserController {
     public Users updateUser(@RequestBody Users user) {
         return userService.updateUser(user);
     }
+
+    // NGO
+
+    // get all NGOs
+    @GetMapping("/ngo")
+    public List<Users> getAllNgos() {
+        return userService.getAllNgos();
+    }
+
+    @GetMapping("/ngo/{id}")
+    public Users getNgoById(@PathVariable String id) {
+        return userService.getNgoById(id);
+    }
+
+    // get pending Ngos
+    @GetMapping("/ngo/pending")
+    public List<Users> getAllPendingNgos() {
+        return userService.getAllPendingNgos();
+    }
+
+    // get accepted Ngos
+    @GetMapping("/ngo/accepted")
+    public List<Users> getAllAcceptedNgos() {
+        return userService.getAllAccpetedNgos();
+    }
+
+    // get rejected Ngos
+    @GetMapping("/ngo/rejected")
+    public List<Users> getAllRejectedNgos() {
+        return userService.getAllRejectedNgos();
+    }
+
+    // accept Ngo
+    @PutMapping("/ngo/accept/{id}")
+    // TODO: add email functionality
+    public Users acceptNgos(@PathVariable String id) {
+        return userService.acceptNgos(id);
+    }
+
+    // reject Ngo
+    @PutMapping("/ngo/reject/{id}")
+    // TODO: add email functionality
+    public Users rejectNgos(@PathVariable String id) {
+        return userService.rejectNgos(id);
+    }
+
+    // get Ngo count
+    @GetMapping("/ngo/count")
+    public int getNgoCount() {
+        return getAllNgos().size();
+    }
+
 }
