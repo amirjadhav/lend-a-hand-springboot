@@ -1,9 +1,13 @@
 package com.lendhand.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Users {
@@ -11,11 +15,18 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @NotEmpty
+    @NotBlank
     String name;
+    @Column(unique = true)
+    @NotNull
     String emailId;
+    @Column(nullable = false)
     String password;
     String phone;
     String address;
+    @NotNull
     String role; // admin / ngo / donor
 
     String certificate; // image/pdf
