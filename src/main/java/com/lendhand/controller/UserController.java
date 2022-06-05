@@ -1,7 +1,11 @@
 package com.lendhand.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
+import com.lendhand.email_service.SendEmailImpl;
 import com.lendhand.model.Users;
 import com.lendhand.service.UserService;
 
@@ -98,16 +102,35 @@ public class UserController {
 
     // accept Ngo
     @PutMapping("/ngo/accept/{id}")
-    // TODO: add email functionality
     public Users acceptNgos(@PathVariable String id) {
-        return userService.acceptNgos(id);
+        Users resultUser = userService.acceptNgos(id);
+        String message = "Congratulation your " + resultUser.getName() + " Ngo request is accepted...";
+        try {
+            new SendEmailImpl().sendmail("jadhav.amir100@gmail.com", resultUser.getEmailId(), "Congratulations...",
+                    message);
+        } catch (MessagingException | IOException e) {
+            System.out.println("Failed to send Email");
+            e.printStackTrace();
+        }
+
+        return resultUser;
     }
 
     // reject Ngo
     @PutMapping("/ngo/reject/{id}")
-    // TODO: add email functionality
     public Users rejectNgos(@PathVariable String id) {
-        return userService.rejectNgos(id);
+
+        Users resultUser = userService.rejectNgos(id);
+        String message = "Ohho your " + resultUser.getName() + " Ngo request is Declined...";
+        try {
+            new SendEmailImpl().sendmail("jadhav.amir100@gmail.com", resultUser.getEmailId(), "Request denied",
+                    message);
+        } catch (MessagingException | IOException e) {
+            System.out.println("Failed to send Email");
+            e.printStackTrace();
+        }
+
+        return resultUser;
     }
 
     // get Ngo count
