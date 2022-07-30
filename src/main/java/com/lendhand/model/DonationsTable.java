@@ -19,6 +19,7 @@ public class DonationsTable {
     private String description;
     private Long ngoId;
     // private String[] images;
+    private int driveId;
     private boolean isDonated;
     private boolean pickUpRequire;
 
@@ -26,7 +27,8 @@ public class DonationsTable {
     }
 
     public DonationsTable(Long donationId, Long donorId, String productName, int quantity, String quality,
-            String productCategory, String description, Long ngoId, boolean isDonated, boolean pickUpRequire) {
+            String productCategory, String description, Long ngoId, boolean isDonated, boolean pickUpRequire,
+            int driveId) {
         this.donationId = donationId;
         this.donorId = donorId;
         this.productName = productName;
@@ -37,6 +39,7 @@ public class DonationsTable {
         this.ngoId = ngoId;
         this.isDonated = isDonated;
         this.pickUpRequire = pickUpRequire;
+        this.driveId = driveId;
     }
 
     public Long getDonationId() {
@@ -119,12 +122,20 @@ public class DonationsTable {
         this.pickUpRequire = pickUpRequire;
     }
 
+    public int getDriveId() {
+        return driveId;
+    }
+
+    public void setDriveId(int driveId) {
+        this.driveId = driveId;
+    }
+
     @Override
     public String toString() {
         return "DonationsTable [description=" + description + ", donationId=" + donationId + ", donorId=" + donorId
-                + ", isDonated=" + isDonated + ", ngoId=" + ngoId + ", pickUpRequire=" + pickUpRequire
-                + ", productCategory=" + productCategory + ", productName=" + productName + ", quality=" + quality
-                + ", quantity=" + quantity + "]";
+                + ", driveId=" + driveId + ", isDonated=" + isDonated + ", ngoId=" + ngoId + ", pickUpRequire="
+                + pickUpRequire + ", productCategory=" + productCategory + ", productName=" + productName + ", quality="
+                + quality + ", quantity=" + quantity + "]";
     }
 
 }

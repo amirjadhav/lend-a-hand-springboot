@@ -106,6 +106,7 @@ public class UserController {
         Users resultUser = userService.acceptNgos(id);
         String message = "Congratulation your " + resultUser.getName() + " Ngo request is accepted...";
         try {
+            // TODO: change mail id
             new SendEmailImpl().sendmail("jadhav.amir100@gmail.com", resultUser.getEmailId(), "Congratulations...",
                     message);
         } catch (MessagingException | IOException e) {
@@ -123,6 +124,7 @@ public class UserController {
         Users resultUser = userService.rejectNgos(id);
         String message = "Ohho your " + resultUser.getName() + " Ngo request is Declined...";
         try {
+            // change mail id
             new SendEmailImpl().sendmail("jadhav.amir100@gmail.com", resultUser.getEmailId(), "Request denied",
                     message);
         } catch (MessagingException | IOException e) {

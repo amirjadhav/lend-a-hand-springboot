@@ -26,7 +26,6 @@ public class DonationController {
     // add donation
     @PostMapping("/")
     public DonationsTable addDonations(@RequestBody DonationsTable DonationsTable) {
-        System.out.println("inside controller : " + DonationsTable);
         return donationService.addDonations(DonationsTable);
     }
 

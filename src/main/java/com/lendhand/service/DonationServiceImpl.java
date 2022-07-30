@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lendhand.model.DonationsTable;
+import com.lendhand.model.Drive;
 import com.lendhand.repository.DonationRepository;
 
 @Service
@@ -15,6 +16,9 @@ public class DonationServiceImpl implements DonationService {
     @Autowired
     DonationRepository donationRepository;
 
+    @Autowired
+    DriveService driveService;
+
     @Override
     public List<DonationsTable> getAllDonations() {
         return donationRepository.findAll();
@@ -22,8 +26,17 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public DonationsTable addDonations(DonationsTable DonationsTable) {
-        System.out.println("Donation is :" + DonationsTable);
-        return donationRepository.save(DonationsTable);
+
+        DonationsTable donation = donationRepository.save(DonationsTable);
+
+        // once user has donated updating the donor count in respective drive
+
+        int driveId = donation.getDriveId();
+
+        Drive drive = driveService.getDriveById(String.valueOf(driveId));
+        drive.setDonorCount(drive.getDonorCount() + 1);
+        driveService.upadateDrive(drive);
+        return donation;
     }
 
     @Override
